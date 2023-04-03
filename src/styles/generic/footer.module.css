@@ -1,0 +1,14 @@
+.footerContainer {
+  background-color: rgb(255, 159, 127);
+  color: white;
+  text-align: center;
+  padding-top: 5%;
+}
+
+.footerContainerLinks {
+  height: 150px;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 5%;
+}

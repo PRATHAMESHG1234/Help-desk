@@ -1,0 +1,187 @@
+.tickets {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+}
+
+.noTicketsContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.noTicketsContainer img {
+  width: 8rem;
+}
+
+.noTicketsTitle,
+.noTicketsPara {
+  text-align: center;
+  color: #626262;
+}
+
+.noTicketsTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+.noTicketsPara {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.noTicketsContainer button {
+  border: none;
+  outline: none;
+  margin-top: 1rem;
+  background: #282a2c;
+  border-radius: 4px;
+  padding: 0.7rem 2rem;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Create Ticket */
+
+.pagePath {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.pagePath p {
+  color: #737779;
+  font-size: 0.9rem;
+}
+
+.createTicketContainer {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 2rem;
+}
+
+.createTicketTitle {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.createTicketTitle button {
+  display: flex;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: none;
+}
+
+.createTicketTitle button svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.createTicketTitle p {
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+
+.createTicketForm {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2%;
+  row-gap: 1rem;
+  padding: 2rem 0 1rem 0;
+}
+
+.createTicketForm .col1 {
+  width: 100%;
+}
+
+.createTicketForm .col2 {
+  width: 49%;
+}
+
+.createTicketForm label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #737779;
+}
+
+.createTicketForm input {
+  width: 100%;
+  outline: none;
+  padding: 0.7rem 1rem;
+  margin-top: 0.3rem;
+  color: #737779;
+  border: 1px solid #d9d9d9;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.uploadFileIntruction {
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 300;
+  color: #737779;
+  margin-top: 0.3rem;
+}
+
+.ticketSubmit,
+.ticketsTopBarButtonGray,
+.ticketsTopBarButtonWhite {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem;
+  color: #ffffff;
+  background: #282a2c;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.ticketsContainer {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.ticketsTopBar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ticketsTopBarButtonWhite {
+  color: #737779;
+  background: none;
+  border: 1px solid #d9d9d9;
+  font-weight: 400;
+}
+
+.ticketsTopBarButtonGray svg path {
+  stroke: #ffffff !important;
+}
+
+.ticketIdLink,
+.ticketIdLink:hover {
+  color: #737779;
+  text-decoration: underline;
+}
+.message {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}

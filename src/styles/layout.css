@@ -1,0 +1,96 @@
+.ant-layout {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #ffffff;
+  }
+  
+  .wb-slider .ant-layout-sider {
+    flex: 0 0 250px !important;
+    max-width: 250px !important;
+    min-width: 250px !important;
+    width: 250px !important;
+    height: 100vh;
+    background: #252525;
+    border: none;
+  }
+  
+  .wb-slider-collapsed .ant-layout-sider-collapsed {
+    border: none;
+    height: 100vh;
+    background: #252525;
+    border: none;
+  }
+  
+  .wb-slider .ant-layout-sider-trigger {
+    width: 250px !important;
+  }
+  
+  .wb-slider-collapsed .ant-layout-sider-trigger,
+  .wb-slider .ant-layout-sider-trigger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(22, 28, 36, 0.08) !important;
+    color: #ffffff !important;
+  }
+  
+  .wb-slider .ant-menu-inline,
+  .wb-slider-collapsed .ant-menu-inline-collapsed {
+    background: #252525 !important;
+  }
+  
+  .wb-slider .ant-menu-item,
+  .wb-slider-collapsed .ant-menu-item {
+    color: #C8C3B6;
+    font-weight: 500;
+    font-size: 0.9rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .wb-slider-collapsed .ant-menu-item {
+    padding-inline: calc(50% - 1.2rem) !important;
+  }
+
+  .wb-slider .ant-menu-item .ant-menu-title-content {
+    margin-inline-start: 1rem;
+  }
+  
+  .wb-slider .ant-menu-item .ant-menu-item-icon,
+  .wb-slider-collapsed .ant-menu-item .ant-menu-item-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .wb-slider .ant-menu-item:hover,
+  .wb-slider-collapsed .ant-menu-item:hover {
+    color: #C8C3B6 !important;
+    background: rgba(22, 28, 36, 0.05);
+  }
+  
+  .wb-slider .ant-menu-item:active,
+  .wb-slider-collapsed .ant-menu-item:active {
+    color: #C8C3B6 !important;
+    background: rgba(22, 28, 36, 0.05) !important;
+  }
+  
+  .wb-slider .ant-menu-item-selected,
+  .wb-slider-collapsed .ant-menu-item-selected {
+    background-color: rgba(22, 28, 36, 0.08) !important;
+    color: #C8C3B6 !important;
+  }
+  
+  /* Logo */
+  .logo-container {
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo-container img {
+    width: 3rem;
+  }
+  

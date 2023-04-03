@@ -1,0 +1,225 @@
+.ticketSectionContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  background: #f9f9fa;
+}
+
+.ticketDetailsContainer {
+  width: 23%;
+  box-shadow: 2px 0px 15px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  padding: 0.8rem 1.5rem;
+  overflow-y: auto;
+  background: #ffffff;
+  z-index: 99;
+}
+
+.ticketConversationContainer {
+  width: 54%;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.ticketIDContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticketId {
+  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.ticketStatus {
+  background: rgba(244, 106, 28, 0.1);
+  color: #f46a1c;
+  border: 1px solid #f46a1c;
+  border-radius: 10rem;
+  font-weight: 500;
+  padding: 0.3rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.ticketFieldContainer {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.ticketFieldTitle,
+.ticketRaisedTime {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.ticketRaisedTime {
+  margin-top: 0.5rem;
+}
+
+.ticketFieldContent {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid #d9d9d9;
+}
+
+.ticketSummaryText,
+.ticketAssignToName,
+.ticketPriorityLable {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.ticketAssignedTo,
+.ticketPriority {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: nowrap;
+}
+
+.ticketAssignedTo img {
+  width: 2rem;
+  border-radius: 50%;
+}
+
+.ticketTags {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  row-gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ticketTag {
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #ececec;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+}
+
+.ticketTimeLineTitle {
+  font-weight: 500;
+}
+
+.ticketTimeLineContainer {
+  margin-top: 1.5rem;
+}
+
+.ticketTimeLineItemTitle {
+  font-weight: 600;
+}
+
+.ticketConversationHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 0.8rem 1.5rem;
+  background: #f9f9fa;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.ticketConversationHeaderTitle {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.ticketCreateBtn {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  background: #fbba00;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.conversationContainer {
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.messageCard {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #d9d9d9;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2%;
+  background: #ffffff;
+}
+
+.messageCardSupportReply {
+  border: 1px solid #fbba00;
+}
+
+.messageCardProfile {
+  width: 7%;
+}
+
+.messageCardProfile img {
+  width: 2rem;
+  border-radius: 50%;
+}
+
+.messageCardMessageContent {
+  width: 91%;
+}
+
+.messageCardMessageContent > :not(:first-child) {
+  margin-top: 0.75rem;
+}
+
+.messageCardMessageHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.messageCardMessageSenderName {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.messageCardMessageDate {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.messageCardMessage {
+  font-weight: 400;
+  font-size: 0.85rem;
+  /* margin-top: 0.75rem; */
+}
+
+.messageCardMessageImage {
+  width: 100%;
+  /* margin-top: 0.75rem; */
+}
+
+.sendReplyContainer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  height: 25vh;
+  background: #ffffff;
+  box-shadow: 0px -2px 14px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+}
+
+.sendReplyTitle {
+  font-weight: 500;
+  font-size: 0.9rem;
+}

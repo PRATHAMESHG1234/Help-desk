@@ -1,0 +1,45 @@
+.loginPage {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginFormContainer {
+    padding: 1rem;
+    width: 40%;
+}
+
+.loginFormContainer label, .loginFormContainer input {
+    width: 100%;
+}   
+
+.loginFormContainer label {
+    font-size: 0.8rem;
+}
+
+.loginFormContainer input {
+    margin: 0.3rem 0 1rem 0;
+    outline: none;
+    padding: 0.5rem 1rem;
+}
+
+.loginFormContainer button {
+    margin: 0 auto;
+    display: block;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+.submitbtncontainer {
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    width: 100%;
+    padding: 24px 0;
+    text-align: left;
+    
+  }
+  .ant-input::placeholder {
+    color: #b3b3b3;
+  }

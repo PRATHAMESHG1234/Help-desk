@@ -1,0 +1,15 @@
+.headerContainerNavbar {
+  height: 150px;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 2%;
+}
+.headerContainer {
+  background-color: rgb(127, 138, 255);
+  padding-bottom: 5%;
+}
+.headerContainer h1 {
+  text-align: center;
+  color: white;
+}
