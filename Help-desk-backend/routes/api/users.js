@@ -39,8 +39,8 @@ router.post(
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
-
-      const { email, fullname, managementType } = req.body;
+      console.log(req.body);
+      const { firstName, lastName, email, managementType } = req.body;
 
       // Check if user with same email exists
       let user = await User.findOne({ email });
@@ -59,8 +59,9 @@ router.post(
       //send email with  username and password
       const response = await sendRegistrationEmail(
         userId,
+        firstName,
+
         email,
-        fullname,
         newPassword
       );
 
@@ -73,15 +74,23 @@ router.post(
       ) {
         result = await createManagementUser(
           userId,
-          fullname,
+          firstName,
+          lastName,
           email,
           newPassword,
           managementType
         );
       } else {
-        result = await createCustomerUser(userId, fullname, email, newPassword);
+        result = await createCustomerUser(
+          userId,
+          firstName,
+          lastName,
+          email,
+          newPassword
+        );
       }
       res.json(response);
+      console.log(response);
       // Generate a JWT token
     } catch (err) {
       console.error(err.message);

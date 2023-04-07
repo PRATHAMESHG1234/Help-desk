@@ -7,7 +7,11 @@ const ManagementSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  fullname: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },

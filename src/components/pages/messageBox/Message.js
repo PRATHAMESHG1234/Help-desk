@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import Dropzone from 'react-dropzone';
+import { Upload, Button, Input } from 'antd';
 
 const MyMessageBox = () => {
   const [message, setMessage] = useState('');
@@ -12,67 +10,43 @@ const MyMessageBox = () => {
     console.log(message, files);
   };
 
-  const handleDrop = (acceptedFiles) => {
-    // Add the dropped files to the state
-    setFiles([...files, ...acceptedFiles]);
+  const handleFileChange = (fileList) => {
+    setFiles(fileList);
   };
-
-  const modules = {
-    toolbar: [
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ color: [] }, { background: [] }],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      ['image', 'clean'],
-    ],
-  };
-
-  const formats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'color',
-    'background',
-    'align',
-    'list',
-    'bullet',
-    'image',
-  ];
 
   return (
     <div style={{ fontSize: '16px', lineHeight: 1.5 }}>
-      <ReactQuill
+      <Input.TextArea
         value={message}
-        onChange={setMessage}
-        modules={modules}
-        formats={formats}
+        onChange={(e) => setMessage(e.target.value)}
         placeholder='Type your message here...'
-        style={{ height: '100px' }} // set the height of the message box
+        autoSize={{ minRows: 4, maxRows: 4 }}
+        style={{ marginBottom: '16px' }}
       />
-      <Dropzone onDrop={handleDrop} accept='image/*'>
-        {({ getRootProps, getInputProps }) => (
-          <section>
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              <p>Drag 'n' drop some files here, or click to select files</p>
-            </div>
-            <aside>
-              {files.map((file) => (
-                <div key={file.name}>
-                  <img src={URL.createObjectURL(file)} alt={file.name} />
-                </div>
-              ))}
-            </aside>
-          </section>
-        )}
-      </Dropzone>
-      <button
+      <Upload
+        multiple
+        fileList={files}
+        onChange={(info) => handleFileChange(info.fileList)}
+      >
+        <Button>Upload Files</Button>
+      </Upload>
+      <div style={{ marginTop: '16px' }}>
+        {files.map((file) => (
+          <div key={file.uid}>
+            <img
+              src={file.thumbUrl}
+              alt={file.name}
+              style={{ width: '100px' }}
+            />
+          </div>
+        ))}
+      </div>
+      <Button
         onClick={handleSendMessage}
-        style={{ backgroundColor: '#282A2C', color: '#fff' }}
+        style={{ backgroundColor: '#282A2C', color: '#fff', marginTop: '16px' }}
       >
         Send
-      </button>
+      </Button>
     </div>
   );
 };

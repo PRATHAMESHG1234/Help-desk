@@ -9,13 +9,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendRegistrationEmail = async (userId, email, fullname, password) => {
+const sendRegistrationEmail = async (userId, firstName, email, password) => {
   try {
     const sendEmail = await transporter.sendMail({
       from: 'helpdesk.scrobits@gmail.com',
       to: email,
       subject: 'Registration Successful',
-      html: `<h2>Dear ${fullname},</h2>
+      html: `<h2>Dear ${firstName},</h2>
       <p>Your registration was successful. Here are your login details:</p>
       <h4>Username: ${email}</h4>
       <h4>Password: ${password}</h4>
@@ -36,7 +36,7 @@ const sendRegistrationEmail = async (userId, email, fullname, password) => {
       error: 'Could not send registration email',
     };
   } catch (error) {
-    console.error(error.message);
+    console.error('abcd:', error.message);
   }
 };
 

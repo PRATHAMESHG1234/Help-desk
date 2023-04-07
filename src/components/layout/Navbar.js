@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import { AiOutlineUsergroupAdd, AiOutlineUser } from 'react-icons/ai';
-import { FaAngleDown } from 'react-icons/fa';
+import {
+  AiOutlineUsergroupAdd,
+  AiOutlineUser,
+  AiOutlineDashboard,
+} from 'react-icons/ai';
+import { FaAngleDown, FaCog, FaUserTie } from 'react-icons/fa';
 import { GiTicket } from 'react-icons/gi';
-import { FiLogOut } from 'react-icons/fi';
+import { FiLock, FiLogOut, FiSettings, FiUsers } from 'react-icons/fi';
 import shortLogo from './images/logo_short.png';
 import styles from '../../styles/index';
 import { a, Link, useNavigate } from 'react-router-dom';
@@ -18,10 +22,10 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
     setSelectedKey(e.key);
     switch (e.key) {
       case '1':
-        navigate('myTickets');
+        navigate('/');
         break;
       case '2':
-        navigate('/');
+        navigate('myTickets');
         break;
       case '3':
         navigate('users');
@@ -34,16 +38,40 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
         break;
     }
   };
-  const alerts = useSelector((state) => state.alerts);
-  // const handelclick = () => {
-  //   navigate('/users');
-  // };
+
+  const user = useSelector((state) => state.auth.user);
+  const managementType = user ? user.managementType : '';
+
+  let menuItems = [
+    {
+      key: '1',
+      icon: <AiOutlineDashboard className={styles.default.largeIcon} />,
+    },
+    { key: '2', icon: <GiTicket className={styles.default.largeIcon} /> },
+
+    { key: '4', icon: <FiSettings className={styles.default.largeIcon} /> },
+    { key: '5', icon: <FiLogOut className={styles.default.largeIcon} /> },
+  ];
+
+  if (managementType === 'Super Admin') {
+    menuItems.splice(
+      2,
+      0,
+      { key: '3', icon: <FiUsers className={styles.default.largeIcon} /> },
+      { key: '7', icon: <FiLock className={styles.default.largeIcon} /> }
+    );
+  } else if (managementType === 'Admin' || managementType === 'Agent') {
+    menuItems.splice(3, 0, {
+      key: '6',
+      icon: <FiUsers className={styles.default.largeIcon} />,
+    });
+  }
+
+  // Render the menu items
+
   return (
     <>
-      <nav
-        className='navbar navbar-expand-lg navbar-light bg-light'
-        style={{ height: '80px' }}
-      >
+      <nav className='navbar navbar-expand-lg navbar-light bg-light'>
         <div className={styles.default.navbar}>
           <Link className={styles.default.navbarBrand} to='#'>
             All Tickets
@@ -87,7 +115,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
         }`}
       >
         <div
-          collapsible
+          collapsible={true}
           collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}
           className={styles.default.sider}
@@ -102,22 +130,18 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
             selectedKeys={[selectedKey]}
             onClick={handleClick}
           >
-            <Menu.Item className={styles.default.menu_item} key='1'>
-              <GiTicket className={styles.default.largeIcon} />
-            </Menu.Item>
-            <Menu.Item className={styles.default.menu_item} key='2'>
-              <AiOutlineUser className={styles.default.largeIcon} />
-            </Menu.Item>
-            <Menu.Item className={styles.default.menu_item} key='3'>
-              <AiOutlineUsergroupAdd
-                className={styles.default.largeIcon}
-                // onClick={handelclick}
-              />
-            </Menu.Item>
-
-            <Menu.Item className={styles.default.menu_item} key='4'>
-              <FiLogOut className={styles.default.largeIcon} />
-            </Menu.Item>
+            {menuItems.map((item) => (
+              <Menu.Item
+                key={item.key}
+                className={`${styles.default.menu_item} ${
+                  selectedKey === item.key
+                    ? styles.default['custom-active']
+                    : ''
+                }`}
+              >
+                {item.icon}
+              </Menu.Item>
+            ))}
           </Menu>
         </div>
       </div>

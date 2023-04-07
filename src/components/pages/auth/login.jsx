@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { login, logout } from '../../../redux/actions/auth';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { login } from '../../../redux/actions/auth';
 import { setAlert } from '../../../redux/actions/Alert';
-
 import { Navigate } from 'react-router-dom';
 import styles from '../../../styles/index';
 import PropTypes from 'prop-types';
 
-const Login = ({ login, isAuthenticated }) => {
-  const dispatch = useDispatch();
+const Login = ({ isAuthenticated, login, setAlert }) => {
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
+
   const { username, password } = formData;
 
   const handleInput = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-  const onSubmit = (event) => {
+
+  const onSubmit = async (event) => {
     event.preventDefault();
 
-    login(username, password);
-    dispatch(setAlert('Login successful!', 'success', 'green'));
+    const loginSuccess = await login(username, password);
+    console.log(isAuthenticated);
   };
 
-  //Redirect if logged in
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      setAlert('Login successful!', 'success', 'green');
+    } else if (isAuthenticated === false) {
+      setAlert('Invalid credentials', 'danger', 'red');
+    }
+  }, [isAuthenticated]);
 
   if (isAuthenticated) {
     return <Navigate to='/' />;
@@ -36,23 +42,21 @@ const Login = ({ login, isAuthenticated }) => {
         <div className={`${styles.default.loginFormContainer}`}>
           <label>UserName</label>
           <input
-            // value={payload.email}
             name='username'
             onChange={handleInput}
-            type={'text'}
+            type='text'
             placeholder='Enter Username'
           />
           <label>Password</label>
           <input
-            // value={payload.password}
             name='password'
             onChange={handleInput}
-            type={'password'}
+            type='password'
             placeholder='Enter Password'
           />
           <button
             style={{ backgroundColor: '#282A2C', color: '#fff' }}
-            onClick={onSubmit}
+            type='submit'
           >
             Submit
           </button>
@@ -61,13 +65,15 @@ const Login = ({ login, isAuthenticated }) => {
     </div>
   );
 };
-Login.prototype = {
+
+Login.propTypes = {
   setAlert: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.Auth.isAuthenticated,
+  isAuthenticated: state.auth.isAuthenticated,
 });
-export default connect(mapStateToProps, { setAlert, login })(Login);
+
+export default connect(mapStateToProps, { login, setAlert })(Login);

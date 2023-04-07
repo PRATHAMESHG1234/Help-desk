@@ -6,7 +6,7 @@ import { GrAdd } from 'react-icons/gr';
 import styles from '../../../styles/index';
 import { CiMenuKebab } from 'react-icons/ci';
 
-import AddUserDrawer from '../addusermodal/AddUserModal';
+import AddUserDrawer from '../addusermodal/Register';
 import noUser from './noUser.png';
 const Users = ({ data }) => {
   console.log(data);

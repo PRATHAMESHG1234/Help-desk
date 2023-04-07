@@ -1,7 +1,4 @@
-import axios from 'axios';
-import setAuthToken from '../../utils/setAuthToken';
 import { setAlert } from './Alert';
-
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -11,20 +8,26 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from './actionTypes';
-const host = 'http://localhost:5000/';
-//load user
-export const loadUser = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
 
+import { fetchWithToken } from '../../utils/fetchWithToken';
+
+const host = 'http://localhost:5000/';
+
+// Load user
+export const loadUser = () => async (dispatch) => {
+  console.log('i get call');
   try {
-    const res = await axios.get(`${host}
-    api/user/auth`);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No token found');
+    }
+
+    const response = await fetchWithToken(`${host}api/user/auth`, 'GET', token);
+    const data = await response;
 
     dispatch({
       type: USER_LOADED,
-      payload: res.data,
+      payload: data,
     });
   } catch (error) {
     dispatch({
@@ -33,31 +36,35 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-///register user
-
+// Register user
 export const register =
-  ({ name, email, password }) =>
+  ({ firstName, lastName, email }) =>
   async (dispatch) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    const body = JSON.stringify({ name, email, password });
-
+    console.log('i get  call');
     try {
-      const res = await axios.post('/api/users', body, config);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No token found');
+      }
+      const body = { firstName, lastName, email };
+      const response = await fetchWithToken(
+        `${host}api/user/register`,
+        'POST',
+        token,
+        body
+      );
+      // console.log(response);
 
+      // const data = await response;
+      // localStorage.setItem('token', data.token); // Store the token in localStorage
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data,
       });
-      dispatch(loadUser());
-    } catch (error) {
-      const errors = error.response.data.errors;
 
-      if (errors) {
+      // dispatch(loadUser());
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errors = error.response.data.errors;
         errors.forEach((error) => {
           dispatch(setAlert(error.msg, 'danger'));
         });
@@ -67,27 +74,30 @@ export const register =
       });
     }
   };
-///login user
 
+/// Login user
 export const login = (username, password) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  const body = JSON.stringify({ username, password });
-
   try {
-    const res = await axios.post(`${host}api/user/login`, body, config);
+    const body = { username, password };
+    const response = await fetchWithToken(
+      `${host}api/user/login`,
+      'POST',
+      null,
+      body
+    );
+
+    const data = await response;
+    localStorage.setItem('token', data.token);
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data,
+      payload: data,
     });
+
     dispatch(loadUser());
   } catch (error) {
-    const errors = error.response.data.errors;
+    const errors = error.Error;
+    console.log(errors);
 
     if (errors) {
       errors.forEach((error) => {
@@ -100,8 +110,7 @@ export const login = (username, password) => async (dispatch) => {
   }
 };
 
-//logout / clear profile
-
+// Logout / Clear profile
 export const logout = () => (dispatch) => {
   dispatch({
     type: LOGOUT,

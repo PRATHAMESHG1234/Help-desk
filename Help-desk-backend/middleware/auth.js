@@ -3,7 +3,7 @@ const config = require('../config/default.json');
 
 exports.auth = (req, res, next) => {
   //Get jwttoken from header
-
+  console.log(req.body);
   const token = req.header('x-auth-token');
 
   //check if no token

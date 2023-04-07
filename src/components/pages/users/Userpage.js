@@ -4,7 +4,6 @@ import styles from '../../../styles/index'; // import your CSS file
 import Users from './Users';
 
 const { Content } = Layout;
-console.log(styles.default.active);
 const UsersPage = () => {
   const [activeRole, setActiveRole] = useState('Customer');
 

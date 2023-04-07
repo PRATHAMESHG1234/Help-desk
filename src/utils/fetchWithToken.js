@@ -15,7 +15,6 @@ export const fetchWithToken = (url, method, token, body) => {
   if (body) {
     options.body = JSON.stringify(body);
   }
-
   return fetch(url, options).then((response) => {
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -24,3 +23,4 @@ export const fetchWithToken = (url, method, token, body) => {
     return response.json();
   });
 };
+export default fetchWithToken;

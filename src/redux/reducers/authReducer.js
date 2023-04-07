@@ -7,13 +7,14 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from '../actions/actionTypes';
-
+const token = localStorage.getItem('token');
 const initialState = {
-  token: localStorage.getItem('token'),
+  token: token,
   isAuthenticated: null,
   loading: true,
   user: null,
 };
+
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
@@ -28,7 +29,6 @@ export default function (state = initialState, action) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
-      console.log('successfull');
       return {
         ...state,
         ...payload,

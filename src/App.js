@@ -11,18 +11,19 @@ import TicketsPage from './components/pages/tickets/TicketsPage';
 import { Provider } from 'react-redux';
 import store from './redux/store/configureStore';
 import Alert from './components/pages/Alert/Alert';
+import Register from './components/pages/addusermodal/Register';
+
 const { Content } = Layout;
 function App() {
-  console.log(store);
   return (
     <>
       <Provider store={store}>
         <Router>
           <Sidebar />
 
-          <Alert />
           <Layout>
             <Content style={{ paddingLeft: '100px', marginTop: '70px' }}>
+              <Alert />
               <Routes>
                 <Route exact path='/' element={<Index />} />
                 <Route exact path='/myTickets' element={<TicketsPage />} />
@@ -37,6 +38,7 @@ function App() {
                   element={<TicketDetail />}
                 />
                 <Route exact path='/auth/login' element={<Login />} />
+                <Route exact path='/auth/signup' element={<Register />} />
                 <Route exact path='/users' element={<UsersPage />} />
               </Routes>
             </Content>

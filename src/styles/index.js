@@ -1,14 +1,22 @@
-const moduleFiles = require.context('../styles', true, /\.module\.css$/);
-const styles = {};
+import { createContext } from 'react';
 
-moduleFiles.keys().forEach((filename) => {
-  const module = moduleFiles(filename);
+const getStyles = () => {
+  const moduleFiles = require.context('../styles', true, /\.module\.css$/);
+  const styles = {};
 
-  for (const key in module) {
-    if (Object.prototype.hasOwnProperty.call(module, key)) {
-      styles[key] = { ...styles[key], ...module[key] };
+  moduleFiles.keys().forEach((filename) => {
+    const module = moduleFiles(filename);
+
+    for (const key in module) {
+      if (Object.prototype.hasOwnProperty.call(module, key)) {
+        styles[key] = { ...styles[key], ...module[key] };
+      }
     }
-  }
-});
+  });
+
+  return styles;
+};
+
+const styles = getStyles();
 
 export default styles;

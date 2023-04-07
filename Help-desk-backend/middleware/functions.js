@@ -25,7 +25,8 @@ const registerUser = async (username, password) => {
 
 const createManagementUser = async (
   user_id,
-  fullname,
+  firstName,
+  lastName,
   email,
   password,
   managementType
@@ -33,7 +34,8 @@ const createManagementUser = async (
   try {
     const user = {
       user_id,
-      fullname,
+      firstName,
+      lastName,
       email,
       password,
       managementType,
@@ -47,11 +49,18 @@ const createManagementUser = async (
   next();
 };
 
-const createCustomerUser = async (user_id, fullname, email, password) => {
+const createCustomerUser = async (
+  user_id,
+  firstName,
+  lastName,
+  email,
+  password
+) => {
   try {
     const user = {
       user_id,
-      fullname,
+      firstName,
+      lastName,
       email,
       password,
     };
