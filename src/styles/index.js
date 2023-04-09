@@ -1,5 +1,3 @@
-import { createContext } from 'react';
-
 const getStyles = () => {
   const moduleFiles = require.context('../styles', true, /\.module\.css$/);
   const styles = {};

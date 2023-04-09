@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from '../../../styles/index';
 import profile from '../images/profile.png';
-import message1 from '../images/message1.png';
+// import message1 from '../images/message1.png';
 import message2 from '../images/message2.png';
 import priority from '../images/priority.png';
 import { Timeline } from 'antd';
 import { BsCircleFill } from 'react-icons/bs';
-import Message from '../messageBox/Message';
+// import Message from '../messageBox/Message';
 import MessageBox from '../messageBox/Message';
 
 const Index = () => {

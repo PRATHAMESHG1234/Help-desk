@@ -23,7 +23,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    const loginSuccess = await login(username, password);
+    await login(username, password);
 
     // Increment the key to force a re-render of the form component
     setFormKey((prevKey) => prevKey + 1);
@@ -35,7 +35,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
     } else if (isAuthenticated === false) {
       setAlert('Invalid credentials', 'danger', 'red');
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, setAlert]);
 
   if (isAuthenticated) {
     return <Navigate to='/' />;

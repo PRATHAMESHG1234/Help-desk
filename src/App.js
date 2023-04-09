@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import Sidebar from './components/layout/Navbar';
 import Login from './components/pages/auth/login';
@@ -35,25 +30,22 @@ function App() {
               <Routes>
                 {isAuthenticated ? (
                   <>
-                    <Route exact path='/' element={<Index />} />
-                    <Route exact path='/myTickets' element={<TicketsPage />} />
+                    <Route path='/' element={<Index />} />
+                    <Route path='/myTickets' element={<TicketsPage />} />
                     <Route
-                      exact
                       path='/tickets/createTicket'
                       element={<CreateTicket />}
                     />
                     <Route
-                      exact
-                      path='/tickets/ticketdetail'
+                      path='/tickets/ticketdetail/:id'
                       element={<TicketDetail />}
                     />
-                    <Route exact path='/users' element={<UsersPage />} />
+                    <Route path='/users' element={<UsersPage />} />
                   </>
                 ) : (
                   <>
-                    <Route exact path='/auth/login' element={<Login />} />
-                    <Route exact path='/auth/signup' element={<Register />} />
-                    <Navigate to='/auth/login' />
+                    <Route path='/auth/login' element={<Login />} />
+                    <Route path='/auth/signup' element={<Register />} />
                   </>
                 )}
               </Routes>

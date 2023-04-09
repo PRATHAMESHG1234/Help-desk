@@ -90,7 +90,8 @@ const TicketComponent = ({ data }) => {
               dataSource={data}
               rowSelection={{
                 type: 'checkbox',
-                ...rowSelection,
+                selectedRowKeys: rowSelection.map((row) => row.key),
+                onChange: handleRowSelection,
               }}
             />
           </div>

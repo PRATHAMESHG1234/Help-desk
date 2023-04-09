@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import { Menu } from 'antd';
-import {
-  AiOutlineUsergroupAdd,
-  AiOutlineUser,
-  AiOutlineDashboard,
-} from 'react-icons/ai';
-import { FaAngleDown, FaCog, FaUserTie } from 'react-icons/fa';
+import { AiOutlineDashboard } from 'react-icons/ai';
+import { FaAngleDown } from 'react-icons/fa';
 import { GiTicket } from 'react-icons/gi';
-import { FiLock, FiLogOut, FiSettings, FiUsers } from 'react-icons/fi';
+import { FiLock, FiSettings, FiUsers } from 'react-icons/fi';
 import shortLogo from './images/logo_short.png';
 import styles from '../../styles/index';
-import { a, Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../redux/actions/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Alert from '../pages/Alert/Alert';
 
 const SidebarComponent = ({ collapsed, setCollapsed }) => {
   const [selectedKey, setSelectedKey] = useState('1');

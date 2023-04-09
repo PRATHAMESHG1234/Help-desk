@@ -44,12 +44,7 @@ export const register =
       const token = localStorage.getItem('token');
 
       const body = { firstName, lastName, email };
-      const response = await fetchWithToken(
-        `${host}api/user/register`,
-        'POST',
-        token,
-        body
-      );
+      await fetchWithToken(`${host}api/user/register`, 'POST', token, body);
       dispatch(setAlert('Registration successful!', 'success'));
       dispatch({
         type: REGISTER_SUCCESS,
