@@ -15,6 +15,7 @@ const Alert = ({ alerts }) => {
       visible={alerts.length > 0}
       footer={null}
       onCancel={() => console.log('onCancel')}
+      zIndex={10000}
     >
       {alerts.map((alert) => (
         <div key={alert.id}>

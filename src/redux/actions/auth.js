@@ -11,7 +11,7 @@ import {
 
 import { fetchWithToken } from '../../utils/fetchWithToken';
 
-const host = 'http://localhost:5000/';
+const host = 'https://creepy-tan-vulture.cyclic.app/';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
@@ -40,12 +40,9 @@ export const loadUser = () => async (dispatch) => {
 export const register =
   ({ firstName, lastName, email }) =>
   async (dispatch) => {
-    console.log('i get  call');
     try {
       const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error('No token found');
-      }
+
       const body = { firstName, lastName, email };
       const response = await fetchWithToken(
         `${host}api/user/register`,
@@ -53,22 +50,18 @@ export const register =
         token,
         body
       );
-      // console.log(response);
-
-      // const data = await response;
-      // localStorage.setItem('token', data.token); // Store the token in localStorage
+      dispatch(setAlert('Registration successful!', 'success'));
       dispatch({
         type: REGISTER_SUCCESS,
       });
-
-      // dispatch(loadUser());
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.errors) {
-        const errors = error.response.data.errors;
-        errors.forEach((error) => {
-          dispatch(setAlert(error.msg, 'danger'));
-        });
-      }
+      const errors = [error];
+      console.log(errors);
+
+      errors.forEach((error) => {
+        dispatch(setAlert('Registration failed.', 'error'));
+      });
+
       dispatch({
         type: REGISTER_FAIL,
       });

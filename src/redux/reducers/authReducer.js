@@ -7,9 +7,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from '../actions/actionTypes';
-const token = localStorage.getItem('token');
 const initialState = {
-  token: token,
+  token: null,
   isAuthenticated: null,
   loading: true,
   user: null,
@@ -27,6 +26,7 @@ export default function (state = initialState, action) {
         user: payload,
       };
     case REGISTER_SUCCESS:
+      return { ...state };
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
       return {
@@ -36,6 +36,9 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case REGISTER_FAIL:
+      return {
+        ...state,
+      };
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:

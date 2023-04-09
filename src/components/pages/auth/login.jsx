@@ -7,6 +7,8 @@ import styles from '../../../styles/index';
 import PropTypes from 'prop-types';
 
 const Login = ({ isAuthenticated, login, setAlert }) => {
+  const [formKey, setFormKey] = useState(0);
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -22,7 +24,9 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
     event.preventDefault();
 
     const loginSuccess = await login(username, password);
-    console.log(isAuthenticated);
+
+    // Increment the key to force a re-render of the form component
+    setFormKey((prevKey) => prevKey + 1);
   };
 
   useEffect(() => {
@@ -38,7 +42,12 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
   }
   return (
     <div className={`${styles.default.loginPage}`}>
-      <form className='form' action='create-profile.html' onSubmit={onSubmit}>
+      <form
+        className='form'
+        action='create-profile.html'
+        onSubmit={onSubmit}
+        key={formKey}
+      >
         <div className={`${styles.default.loginFormContainer}`}>
           <label>UserName</label>
           <input

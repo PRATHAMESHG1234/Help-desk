@@ -17,21 +17,33 @@ import Alert from '../pages/Alert/Alert';
 
 const SidebarComponent = ({ collapsed, setCollapsed }) => {
   const [selectedKey, setSelectedKey] = useState('1');
+  const [Heading, setHeading] = useState('Home');
   const navigate = useNavigate();
   const handleClick = (e) => {
     setSelectedKey(e.key);
     switch (e.key) {
       case '1':
+        setHeading('Home');
         navigate('/');
         break;
       case '2':
+        setHeading('Tickets');
+
         navigate('myTickets');
         break;
       case '3':
+        setHeading('users');
+
         navigate('users');
         break;
       case '4':
-        navigate('/logut');
+        setHeading('Account Setting');
+        navigate('/setting');
+        break;
+      case '5':
+        setHeading('Acsess Management');
+
+        navigate('/management');
         break;
 
       default:
@@ -41,7 +53,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
 
   const user = useSelector((state) => state.auth.user);
   const managementType = user ? user.managementType : '';
-
+  console.log(user);
   let menuItems = [
     {
       key: '1',
@@ -50,7 +62,6 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
     { key: '2', icon: <GiTicket className={styles.default.largeIcon} /> },
 
     { key: '4', icon: <FiSettings className={styles.default.largeIcon} /> },
-    { key: '5', icon: <FiLogOut className={styles.default.largeIcon} /> },
   ];
 
   if (managementType === 'Super Admin') {
@@ -58,11 +69,11 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
       2,
       0,
       { key: '3', icon: <FiUsers className={styles.default.largeIcon} /> },
-      { key: '7', icon: <FiLock className={styles.default.largeIcon} /> }
+      { key: '5', icon: <FiLock className={styles.default.largeIcon} /> }
     );
   } else if (managementType === 'Admin' || managementType === 'Agent') {
     menuItems.splice(3, 0, {
-      key: '6',
+      key: '3',
       icon: <FiUsers className={styles.default.largeIcon} />,
     });
   }
@@ -74,7 +85,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>
         <div className={styles.default.navbar}>
           <Link className={styles.default.navbarBrand} to='#'>
-            All Tickets
+            {Heading}
           </Link>
           <div className='ml-auto'>
             <div className={styles.default.userIcons}>

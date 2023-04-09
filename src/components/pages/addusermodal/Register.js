@@ -28,11 +28,9 @@ const Register = ({ visible, onClose, register }) => {
       .then(() => {
         register(formData);
         form.resetFields();
-        setAlert('Registration successful!', 'success');
       })
       .catch((error) => {
         console.log(error);
-        setAlert('Registration failed.', 'error');
       });
   };
 

@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import { Layout } from 'antd';
 import Sidebar from './components/layout/Navbar';
 import Login from './components/pages/auth/login';
@@ -14,7 +19,10 @@ import Alert from './components/pages/Alert/Alert';
 import Register from './components/pages/addusermodal/Register';
 
 const { Content } = Layout;
+
 function App() {
+  const isAuthenticated = store.getState().auth.isAuthenticated;
+
   return (
     <>
       <Provider store={store}>
@@ -25,21 +33,29 @@ function App() {
             <Content style={{ paddingLeft: '100px', marginTop: '70px' }}>
               <Alert />
               <Routes>
-                <Route exact path='/' element={<Index />} />
-                <Route exact path='/myTickets' element={<TicketsPage />} />
-                <Route
-                  exact
-                  path='/tickets/createTicket'
-                  element={<CreateTicket />}
-                />
-                <Route
-                  exact
-                  path='/tickets/ticketdetail'
-                  element={<TicketDetail />}
-                />
-                <Route exact path='/auth/login' element={<Login />} />
-                <Route exact path='/auth/signup' element={<Register />} />
-                <Route exact path='/users' element={<UsersPage />} />
+                {isAuthenticated ? (
+                  <>
+                    <Route exact path='/' element={<Index />} />
+                    <Route exact path='/myTickets' element={<TicketsPage />} />
+                    <Route
+                      exact
+                      path='/tickets/createTicket'
+                      element={<CreateTicket />}
+                    />
+                    <Route
+                      exact
+                      path='/tickets/ticketdetail'
+                      element={<TicketDetail />}
+                    />
+                    <Route exact path='/users' element={<UsersPage />} />
+                  </>
+                ) : (
+                  <>
+                    <Route exact path='/auth/login' element={<Login />} />
+                    <Route exact path='/auth/signup' element={<Register />} />
+                    <Navigate to='/auth/login' />
+                  </>
+                )}
               </Routes>
             </Content>
           </Layout>
