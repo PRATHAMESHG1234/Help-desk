@@ -9,7 +9,7 @@ import {
 } from '../actions/actionTypes';
 const initialState = {
   token: null,
-  isAuthenticated: null,
+  isAuthenticated: false,
   loading: true,
   user: null,
 };

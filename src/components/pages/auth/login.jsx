@@ -13,7 +13,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
     username: '',
     password: '',
   });
-
+  const [submitted, setSubmitted] = useState(false);
   const { username, password } = formData;
 
   const handleInput = (event) => {
@@ -24,19 +24,20 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
     event.preventDefault();
 
     await login(username, password);
-
+    setSubmitted(true);
     // Increment the key to force a re-render of the form component
     setFormKey((prevKey) => prevKey + 1);
   };
 
   useEffect(() => {
-    if (isAuthenticated === true) {
+    if (submitted && isAuthenticated === true) {
+      // Only show the alert when submitted is true
       setAlert('Login successful!', 'success', 'green');
-    } else if (isAuthenticated === false) {
+    } else if (submitted && isAuthenticated === false) {
+      // Only show the alert when submitted is true
       setAlert('Invalid credentials', 'danger', 'red');
     }
-  }, [isAuthenticated, setAlert]);
-
+  }, [submitted, isAuthenticated, setAlert]);
   if (isAuthenticated) {
     return <Navigate to='/' />;
   }

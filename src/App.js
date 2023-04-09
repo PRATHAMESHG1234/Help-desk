@@ -9,15 +9,13 @@ import TicketDetail from './components/pages/tickets/ticketDetail';
 import UsersPage from './components/pages/users/Userpage';
 import TicketsPage from './components/pages/tickets/TicketsPage';
 import { Provider } from 'react-redux';
-import store from './redux/store/configureStore';
 import Alert from './components/pages/Alert/Alert';
 import Register from './components/pages/addusermodal/Register';
+import store from './redux/store/configureStore';
 
 const { Content } = Layout;
 
 function App() {
-  const isAuthenticated = store.getState().auth.isAuthenticated;
-
   return (
     <>
       <Provider store={store}>
@@ -28,26 +26,21 @@ function App() {
             <Content style={{ paddingLeft: '100px', marginTop: '70px' }}>
               <Alert />
               <Routes>
-                {isAuthenticated ? (
-                  <>
-                    <Route path='/' element={<Index />} />
-                    <Route path='/myTickets' element={<TicketsPage />} />
-                    <Route
-                      path='/tickets/createTicket'
-                      element={<CreateTicket />}
-                    />
-                    <Route
-                      path='/tickets/ticketdetail/:id'
-                      element={<TicketDetail />}
-                    />
-                    <Route path='/users' element={<UsersPage />} />
-                  </>
-                ) : (
-                  <>
-                    <Route path='/auth/login' element={<Login />} />
-                    <Route path='/auth/signup' element={<Register />} />
-                  </>
-                )}
+                <Route path='/auth/login' element={<Login />} />
+
+                <Route path='/' element={<Index />} />
+                <Route path='/myTickets' element={<TicketsPage />} />
+                <Route
+                  path='/tickets/createTicket'
+                  element={<CreateTicket />}
+                />
+                <Route
+                  path='/tickets/ticketdetail/:id'
+                  element={<TicketDetail />}
+                />
+                <Route path='/users' element={<UsersPage />} />
+
+                <Route path='/auth/signup' element={<Register />} />
               </Routes>
             </Content>
           </Layout>

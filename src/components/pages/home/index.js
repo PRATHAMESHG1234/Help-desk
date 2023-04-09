@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../../styles/index';
 import profile from '../images/profile.png';
 // import message1 from '../images/message1.png';
@@ -8,9 +8,18 @@ import { Timeline } from 'antd';
 import { BsCircleFill } from 'react-icons/bs';
 // import Message from '../messageBox/Message';
 import MessageBox from '../messageBox/Message';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Index = () => {
-  console.log(styles);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth/login');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className={`${styles.default.ticketSectionContainer}`}>
