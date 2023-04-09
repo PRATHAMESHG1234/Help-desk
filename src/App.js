@@ -16,8 +16,6 @@ import Register from './components/pages/addusermodal/Register';
 const { Content } = Layout;
 
 function App() {
-  const isAuthenticated = store.getState().auth.isAuthenticated;
-
   return (
     <>
       <Provider store={store}>
