@@ -65,6 +65,7 @@ export const register =
 
 /// Login user
 export const login = (username, password) => async (dispatch) => {
+  console.log(username, password);
   try {
     const body = { username, password };
     const response = await fetchWithToken(
@@ -85,7 +86,7 @@ export const login = (username, password) => async (dispatch) => {
     dispatch(loadUser());
   } catch (error) {
     const errors = error.Error;
-    console.log(errors);
+    console.log(error);
 
     if (errors) {
       errors.forEach((error) => {

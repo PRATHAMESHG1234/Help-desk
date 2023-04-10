@@ -35,7 +35,7 @@ function App() {
                   element={<CreateTicket />}
                 />
                 <Route
-                  path='/tickets/ticketdetail/:id'
+                  path='/tickets/ticketdetail'
                   element={<TicketDetail />}
                 />
                 <Route path='/users' element={<UsersPage />} />
