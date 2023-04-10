@@ -8,14 +8,11 @@ import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 const Login = ({ isAuthenticated, login, setAlert }) => {
-  const [formKey, setFormKey] = useState(0);
-
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
 
-  const [submitted, setSubmitted] = useState(false);
   const { username, password } = formData;
 
   const handleInput = (event) => {
@@ -26,22 +23,9 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    setSubmitted(true);
     await login(username, password);
-    setSubmitted(false);
-    // Increment the key to force a re-render of the form component
-    setFormKey((prevKey) => prevKey + 1);
   };
 
-  useEffect(() => {
-    if (submitted && isAuthenticated === true) {
-      // Only show the alert when submitted is true
-      setAlert('Login successful!', 'success', 'green');
-    } else if (submitted && isAuthenticated === false) {
-      // Only show the alert when submitted is true
-      setAlert('Invalid credentials', 'danger', 'red');
-    }
-  }, [submitted, isAuthenticated, setAlert, formKey]);
   if (isAuthenticated) {
     return <Navigate to='/' />;
   }

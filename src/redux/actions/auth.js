@@ -12,23 +12,32 @@ import {
 import { fetchWithToken } from '../../utils/fetchWithToken';
 
 const host = 'https://creepy-tan-vulture.cyclic.app/';
+// const host = 'http://localhost:5000/';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
-  console.log('i get call');
   try {
     const token = localStorage.getItem('token');
     if (!token) {
+      dispatch({
+        type: AUTH_ERROR,
+      });
       throw new Error('No token found');
     }
 
     const response = await fetchWithToken(`${host}api/user/auth`, 'GET', token);
-    const data = await response;
+    if (response.success === true) {
+      const data = await response.data;
 
-    dispatch({
-      type: USER_LOADED,
-      payload: data,
-    });
+      dispatch({
+        type: USER_LOADED,
+        payload: data,
+      });
+    } else if (response.success === false) {
+      dispatch({
+        type: AUTH_ERROR,
+      });
+    }
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
@@ -38,24 +47,36 @@ export const loadUser = () => async (dispatch) => {
 
 // Register user
 export const register =
-  ({ firstName, lastName, email }) =>
+  ({ firstName, lastName, email, managementType }) =>
   async (dispatch) => {
     try {
       const token = localStorage.getItem('token');
 
-      const body = { firstName, lastName, email };
-      await fetchWithToken(`${host}api/user/register`, 'POST', token, body);
-      dispatch(setAlert('Registration successful!', 'success'));
-      dispatch({
-        type: REGISTER_SUCCESS,
-      });
+      const body = { firstName, lastName, email, managementType };
+      const response = await fetchWithToken(
+        `${host}api/user/register`,
+        'POST',
+        token,
+        body
+      );
+      console.log('response:', response);
+      if (response.success === true) {
+        dispatch(setAlert(response.message, 'success'));
+
+        dispatch({
+          type: REGISTER_SUCCESS,
+        });
+      } else if (response.success === false) {
+        dispatch(
+          setAlert(`Registration failed.:   ${response.error}`, 'danger', 'red')
+        );
+        dispatch({
+          type: REGISTER_FAIL,
+        });
+      }
     } catch (error) {
       const errors = [error];
       console.log(errors);
-
-      errors.forEach((error) => {
-        dispatch(setAlert('Registration failed.', 'error'));
-      });
 
       dispatch({
         type: REGISTER_FAIL,
@@ -74,16 +95,26 @@ export const login = (username, password) => async (dispatch) => {
       null,
       body
     );
+    console.log('response,', response);
+    if (response.success === true) {
+      const data = await response.data;
+      localStorage.setItem('token', data.token);
 
-    const data = await response;
-    localStorage.setItem('token', data.token);
-
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: data,
-    });
-
-    dispatch(loadUser());
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: data,
+      });
+      dispatch(setAlert(response.message, 'success'));
+      dispatch(loadUser());
+    }
+    if (response.success === false) {
+      dispatch(
+        setAlert(`Login failed.:   ${response.message}`, 'danger', 'red')
+      );
+      dispatch({
+        type: LOGIN_FAIL,
+      });
+    }
   } catch (error) {
     const errors = error.Error;
     console.log(error);
@@ -95,6 +126,7 @@ export const login = (username, password) => async (dispatch) => {
     }
     dispatch({
       type: LOGIN_FAIL,
+      payload: error.message,
     });
   }
 };
