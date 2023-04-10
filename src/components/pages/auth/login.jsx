@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
 import { setAlert } from '../../../redux/actions/Alert';
-import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-const Login = ({ isAuthenticated, login, setAlert }) => {
+const Login = ({ login }) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
-
   const { username, password } = formData;
 
   const handleInput = (event) => {
@@ -26,9 +24,6 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
     await login(username, password);
   };
 
-  if (isAuthenticated) {
-    return <Navigate to='/' />;
-  }
   return (
     <Form
       name='login'
@@ -95,8 +90,8 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
 };
 
 Login.propTypes = {
-  setAlert: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  loadUser: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 

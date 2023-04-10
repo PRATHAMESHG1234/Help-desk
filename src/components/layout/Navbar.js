@@ -47,7 +47,6 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
 
   const user = useSelector((state) => state.auth.user);
   const managementType = user ? user.managementType : '';
-  console.log(user);
   let menuItems = [
     {
       key: '1',

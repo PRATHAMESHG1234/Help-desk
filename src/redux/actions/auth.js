@@ -11,8 +11,8 @@ import {
 
 import { fetchWithToken } from '../../utils/fetchWithToken';
 
-const host = 'https://creepy-tan-vulture.cyclic.app/';
-// const host = 'http://localhost:5000/';
+// const host = 'https://creepy-tan-vulture.cyclic.app/';
+const host = 'http://localhost:5000/';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
@@ -22,12 +22,14 @@ export const loadUser = () => async (dispatch) => {
       dispatch({
         type: AUTH_ERROR,
       });
+
       throw new Error('No token found');
     }
 
     const response = await fetchWithToken(`${host}api/user/auth`, 'GET', token);
+    console.log('responsea:', response);
     if (response.success === true) {
-      const data = await response.data;
+      const data = await response.data.user;
 
       dispatch({
         type: USER_LOADED,
@@ -61,7 +63,7 @@ export const register =
       );
       console.log('response:', response);
       if (response.success === true) {
-        dispatch(setAlert(response.message, 'success'));
+        dispatch(setAlert(response.message, 'success', 'green'));
 
         dispatch({
           type: REGISTER_SUCCESS,
@@ -79,7 +81,7 @@ export const register =
       console.log(errors);
 
       errors.forEach((error) => {
-        dispatch(setAlert('Registration failed.', error));
+        dispatch(setAlert('Registration failed.' + error, 'danger', 'red'));
       });
 
       dispatch({
@@ -90,7 +92,6 @@ export const register =
 
 /// Login user
 export const login = (username, password) => async (dispatch) => {
-  console.log(username, password);
   try {
     const body = { username, password };
     const response = await fetchWithToken(
@@ -108,7 +109,7 @@ export const login = (username, password) => async (dispatch) => {
         type: LOGIN_SUCCESS,
         payload: data,
       });
-      dispatch(setAlert(response.message, 'success'));
+      dispatch(setAlert(response.message, 'success', 'green'));
       dispatch(loadUser());
     }
     if (response.success === false) {
@@ -125,7 +126,7 @@ export const login = (username, password) => async (dispatch) => {
 
     if (errors) {
       errors.forEach((error) => {
-        dispatch(setAlert(error.msg, 'danger'));
+        dispatch(setAlert(error.msg, 'danger', 'red'));
       });
     }
     dispatch({

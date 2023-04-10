@@ -8,19 +8,25 @@ import { Timeline } from 'antd';
 import { BsCircleFill } from 'react-icons/bs';
 // import Message from '../messageBox/Message';
 import MessageBox from '../messageBox/Message';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { loadUser } from '../../../redux/actions/auth';
 
 const Index = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isAuthenticated !== true) {
       navigate('/auth/login');
+    } else if (isAuthenticated === true) {
+      console.log('i get calllll');
+      navigate('/');
+      dispatch(loadUser());
     }
-  }, [isAuthenticated, navigate]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
   return (
     <div className={`${styles.default.ticketSectionContainer}`}>
       <div className={`${styles.default.ticketDetailsContainer}`}>
