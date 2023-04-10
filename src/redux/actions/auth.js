@@ -54,7 +54,7 @@ export const register =
       console.log(errors);
 
       errors.forEach((error) => {
-        dispatch(setAlert('Registration failed.', 'error'));
+        dispatch(setAlert('Registration failed.', error));
       });
 
       dispatch({
