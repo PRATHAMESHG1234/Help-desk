@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
 import { setAlert } from '../../../redux/actions/Alert';
 import { Navigate } from 'react-router-dom';
-import styles from '../../../styles/index';
 import PropTypes from 'prop-types';
 import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -41,7 +40,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
       // Only show the alert when submitted is true
       setAlert('Invalid credentials', 'danger', 'red');
     }
-  }, [submitted, isAuthenticated, setAlert]);
+  }, [submitted, isAuthenticated, setAlert, formKey]);
   if (isAuthenticated) {
     return <Navigate to='/' />;
   }
