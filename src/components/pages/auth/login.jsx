@@ -26,8 +26,9 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    await login(username, password);
     setSubmitted(true);
+    await login(username, password);
+    setSubmitted(false);
     // Increment the key to force a re-render of the form component
     setFormKey((prevKey) => prevKey + 1);
   };
