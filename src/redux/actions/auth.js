@@ -78,6 +78,10 @@ export const register =
       const errors = [error];
       console.log(errors);
 
+      errors.forEach((error) => {
+        dispatch(setAlert('Registration failed.', error));
+      });
+
       dispatch({
         type: REGISTER_FAIL,
       });
