@@ -8,6 +8,7 @@ import { Timeline } from 'antd';
 import { BsCircleFill } from 'react-icons/bs';
 // import Message from '../messageBox/Message';
 import MessageBox from '../messageBox/Message';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   return (
@@ -85,9 +86,13 @@ const Index = () => {
           <p className={`${styles.default.ticketConversationHeaderTitle}`}>
             Conversation with Michael Brooks
           </p>
-          <button className={`${styles.default.ticketCreateBtn}`}>
+          <Link
+            to='/tickets/createTicket'
+            className={styles.default.ticketCreateBtn}
+            style={{ textDecoration: 'none' }}
+          >
             Create New Ticket
-          </button>
+          </Link>
         </div>
         <div className={`${styles.default.conversationContainer}`}>
           <div className={`${styles.default.messageCard}`}>
