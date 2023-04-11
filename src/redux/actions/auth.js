@@ -11,8 +11,8 @@ import {
 
 import { fetchWithToken } from '../../utils/fetchWithToken';
 
-const host = 'https://creepy-tan-vulture.cyclic.app/';
-// const host = 'http://localhost:5000/';
+// const host = 'https://creepy-tan-vulture.cyclic.app/';
+const host = 'http://localhost:5000/';
 
 // Load user
 export const loadUser = () => async (dispatch) => {
@@ -111,6 +111,7 @@ export const login = (username, password) => async (dispatch) => {
       });
       dispatch(setAlert(response.message, 'success', 'green'));
       dispatch(loadUser());
+      return true;
     }
     if (response.success === false) {
       dispatch(
