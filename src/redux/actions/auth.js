@@ -11,9 +11,16 @@ import {
 
 import { fetchWithToken } from '../../utils/fetchWithToken';
 
- const host = 'https://creepy-tan-vulture.cyclic.app/';
+const host = 'https://creepy-tan-vulture.cyclic.app/';
 //const host = 'http://localhost:5000/';
+const setTokenToLocal = (data) => {
+  localStorage.setItem('token', data.token);
 
+  // Schedule a function to delete the token after 3 hours
+  setTimeout(() => {
+    localStorage.removeItem('token');
+  }, 3 * 60 * 60 * 1000); // 3 hours in milliseconds
+};
 // Load user
 export const loadUser = () => async (dispatch) => {
   try {
@@ -103,7 +110,7 @@ export const login = (username, password) => async (dispatch) => {
     console.log('response,', response);
     if (response.success === true) {
       const data = await response.data;
-      localStorage.setItem('token', data.token);
+      setTokenToLocal(data);
 
       dispatch({
         type: LOGIN_SUCCESS,
